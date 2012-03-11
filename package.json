@@ -1,8 +1,8 @@
 {
   "name": "node-block",
   "version": "0.1.0",
-  "description": "An async contrl-flow library for Node.js. Parallelable and Nestable.",
-  "keywords": ["control-flow"],
+  "description": "An async contrl-flow library. Easily error handling.",
+  "keywords": ["control-flow", "async"],
   "author": "tasogarepg <tasogare.pg@gmail.com>",
   "homepage": "http://github.com/tasogarepg/node-block",
   "repository": "git://github.com/tasogarepg/node-block.git",
