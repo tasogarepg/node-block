@@ -95,6 +95,7 @@ block(
 )(sample);
 
 function sample(err){
+  if (err) throw err;
   console.log(this.data.d1);
 }
 ```

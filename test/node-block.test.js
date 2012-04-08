@@ -129,6 +129,29 @@ describe('node-block', function() {
     )(done);
   });
 
+  it('throw exception and async', function(done) {
+    block(
+      function() {
+        this.data.d1 = 'a';
+        throw new Error('test');
+      },
+      function() {
+        assert(false);
+      },
+      function cat(err) {
+        assert.equal(this.data.d1, 'a');
+        assert.equal(err.message, 'test');
+        fs.readFile(fileA, 'utf8', this.async('d2'));
+        fs.readFile(fileB, 'utf8', this.async('d3'));
+      }
+    )(function(err) {
+      var str = this.data.d2 + this.data.d3;
+      assert.equal(str, 'aaaabbbb');
+      assert.equal(err, null);
+      done();
+    });
+  });
+
   it('throw exception from async', function(done) {
     block(
       function() {
@@ -208,6 +231,32 @@ describe('node-block', function() {
     });
   });
 
+  it('catch exception and throw async', function(done) {
+    block(
+      function() {
+        throw new Error('test');
+      },
+      function() {
+        assert(false);
+      },
+      function cat(err) {
+        assert.notEqual(err, null);
+        assert.equal(err.message, 'test');
+        this.data.d1 = 'b';
+        fs.readFile(fileA, 'utf8', this.async('d1'));
+        throw err;
+      },
+      function fin(err) {
+        assert.equal(this.data.d1, 'b'); // d1 is not 'aaaa'. It's because cat() throws a err immediately.
+        assert.notEqual(err, null);
+        assert.equal(err.message, 'test');
+      }
+    )(function(err) {
+      assert.notEqual(err, null);
+      done((err.message == 'test') ? null : err);
+    });
+  });
+
   it('no catch exception', function(done) {
     block(
       function() {
@@ -257,6 +306,30 @@ describe('node-block', function() {
     )(function(err) {
       var str = this.data.d1 + this.data.d2;
       assert.equal(str, 'aaaabbbb');
+      assert.notEqual(err, null);
+      done((err.message == 'test') ? null : err);
+    });
+  });
+
+  it('default callback', function(done) {
+    block(
+      function() {
+        block(
+          function() {
+            throw new Error('test');
+          },
+          function cat(err) {
+            throw err;
+          },
+          function fin() {
+            ;
+          }
+        )();
+      },
+      function() {
+        assert(false);
+      }
+    )(function(err) {
       assert.notEqual(err, null);
       done((err.message == 'test') ? null : err);
     });
