@@ -116,12 +116,14 @@ describe('node-block', function() {
   it('throw exception', function(done) {
     block(
       function() {
+        this.data.d1 = 'a';
         throw new Error('test');
       },
       function() {
         assert(false);
       },
       function cat(err) {
+        assert.equal(this.data.d1, 'a');
         assert.equal(err.message, 'test');
       }
     )(done);
