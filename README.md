@@ -1,6 +1,6 @@
 # node-block
 
-An async contrl-flow library for Node.js.  
+An async control-flow library for Node.js.  
 Easily parallel execution and error handling.  
 
 ## Installation
