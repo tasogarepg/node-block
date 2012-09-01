@@ -1,6 +1,6 @@
 {
   "name": "node-block",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "An async control-flow library. Easily error handling.",
   "keywords": ["control-flow", "async"],
   "author": "tasogarepg <tasogare.pg@gmail.com>",
