@@ -72,7 +72,7 @@ block(
     // when errorless, not run here.
   },
   function fin() {        // finally
-    console.log('fin');
+    console.log('fin');   // always run
   }
 )();
 ```
@@ -130,15 +130,6 @@ block(
   }
 )();
 ```
-
-## About API
-
-### this.async([String dataName])
-Make a callback for async function. [String dataName] is name of setting result data. It's named arbitrarily.  
-
-### this.end([Error err])
-Jump to end. If [Error err] is set jump to cat(), else jump to fin() or callback. If cat(), fin(), callback don't exist , exit block.  
-This api must be called with 'return'.  
 
 ## License
 
