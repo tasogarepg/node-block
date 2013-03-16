@@ -432,22 +432,22 @@ describe('node-block', function() {
       }
       block(
         function() {
-          process.nextTick(this.async());
+          setImmediate(this.async());
         },
         function() {
-          process.nextTick(this.async());
-          process.nextTick(this.async());
+          setImmediate(this.async());
+          setImmediate(this.async());
         },
         function() {
-          process.nextTick(this.async());
-          process.nextTick(this.async());
-          process.nextTick(this.async());
+          setImmediate(this.async());
+          setImmediate(this.async());
+          setImmediate(this.async());
         },
         function() {
-          process.nextTick(this.async());
-          process.nextTick(this.async());
-          process.nextTick(this.async());
-          process.nextTick(this.async());
+          setImmediate(this.async());
+          setImmediate(this.async());
+          setImmediate(this.async());
+          setImmediate(this.async());
         }
       )(serialLoop);
     })();

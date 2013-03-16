@@ -11,7 +11,7 @@ Easily parallel execution and error handling.
 
 ```js
 var fs = require('fs');
-var block = require('node-block.js').block;
+var block = require('node-block').block;
 
 block(
   function() {
@@ -31,7 +31,7 @@ Function name is `cat` and `fin`.
 
 ```js
 var fs = require('fs');
-var block = require('node-block.js').block;
+var block = require('node-block').block;
 
 block(
   function() {
@@ -57,7 +57,7 @@ call `this.end()` with return.
 
 ```js
 var fs = require('fs');
-var block = require('node-block.js').block;
+var block = require('node-block').block;
 
 block(
   function() {
@@ -83,7 +83,7 @@ sample() is called after fin().
 
 ```js
 var fs = require('fs');
-var block = require('node-block.js').block;
+var block = require('node-block').block;
 
 block(
   function() {
@@ -104,7 +104,7 @@ function sample(err){
 
 ```js
 var fs = require('fs');
-var block = require('node-block.js').block;
+var block = require('node-block').block;
 
 block(
   function() {
@@ -127,6 +127,29 @@ block(
     var str = this.data.d1 + this.data.d2 + this.data.d3 +
       this.data.d4.e1 + this.data.d4.e2 + this.data.d4.e3;
     console.log(str);
+  }
+)();
+```
+
+### setTimeout
+
+```js
+var block = require('node-block').block;
+
+block(
+  function() {
+    var cb1 = this.async('d1');
+    setTimeout(function() {
+      try {
+        cb1(null, 'abc');
+      } catch (e) {
+        cb1(e);
+      }
+    }, 1000);
+  },
+  function() {
+    var str = this.data.d1;
+    console.log(str);   // abc
   }
 )();
 ```
