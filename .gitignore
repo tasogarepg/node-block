@@ -1,13 +1,2 @@
-# common
-.DS_Store
-
-# backup
-*~
-*.bak
-
-# IDE
-.project
-.settings
-
 # Node.js
-node_modules
+node_modules/
