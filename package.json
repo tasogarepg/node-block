@@ -4,6 +4,7 @@
   "description": "An async control-flow library. Easily error handling.",
   "keywords": ["control-flow", "async"],
   "author": "tasogarepg <tasogare.pg@gmail.com>",
+  "license": "MIT",
   "homepage": "http://github.com/tasogarepg/node-block",
   "repository": "git://github.com/tasogarepg/node-block.git",
   "main": "./lib/node-block.js",
